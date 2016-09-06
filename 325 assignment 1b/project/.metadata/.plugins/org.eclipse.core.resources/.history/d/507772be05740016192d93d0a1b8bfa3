@@ -1,0 +1,39 @@
+package nz.ac.auckland.parolee.test;
+
+import static org.junit.Assert.*;
+
+import java.util.Calendar;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import nz.ac.auckland.musician.domain.Experience;
+import nz.ac.auckland.musician.domain.Instrument;
+import nz.ac.auckland.musician.domain.Musician;
+import nz.ac.auckland.musician.domain.PersistanceManager2;
+import nz.ac.auckland.parolee.domain.Gender;
+
+public class MusicianPersistanceTest {
+	
+	private Logger logger = LoggerFactory.getLogger(MusicianPersistanceTest.class);
+	
+	@Test
+	public void testMusicianPersistance(){
+		logger.info("Starting test");
+		PersistanceManager2 manager = new PersistanceManager2();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(1963, 8, 3);
+		Musician het = new Musician(1, "Hetfield", "James", Gender.MALE, Experience.PROFESSIONAL, cal, Instrument.GUITAR);
+		
+		cal.set(1994, 7, 3);
+		Musician pri = new Musician(2, "Singh", "Priyankit", Gender.MALE, Experience.ADVANCED, cal, Instrument.GUITAR);
+		
+		manager.addMusicianToDatabase(het);
+		manager.addMusicianToDatabase(pri);
+		
+		// Query the database here
+	}
+
+}
