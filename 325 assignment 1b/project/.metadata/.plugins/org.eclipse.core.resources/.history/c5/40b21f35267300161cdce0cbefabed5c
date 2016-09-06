@@ -1,0 +1,53 @@
+package nz.ac.auckland.musician.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Band {
+	@Id @GeneratedValue 
+	private int id;
+	
+	private String bandName;
+	
+	private List<Musician> members = new ArrayList<Musician>();
+	
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getBandName() {
+		return bandName;
+	}
+	
+	
+	public void setBandName(String bandName) {
+		this.bandName = bandName;
+	}
+	
+	
+	public List<Musician> getMembers() {
+		return members;
+	}
+	
+	// May not need this method
+	public void setMembers(List<Musician> members) {
+		this.members = members;
+	}
+	
+	public void addMember(Musician newMember){
+		members.add(newMember);
+	}
+	
+}

@@ -1,0 +1,5 @@
+package nz.ac.auckland.musician;
+
+public class Musician {
+
+}

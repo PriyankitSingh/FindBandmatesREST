@@ -1,0 +1,34 @@
+package nz.ac.auckland.musician.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Band {
+	private String bandName;
+	private List<Musician> members = new ArrayList<Musician>();
+	
+	
+	public String getBandName() {
+		return bandName;
+	}
+	
+	
+	public void setBandName(String bandName) {
+		this.bandName = bandName;
+	}
+	
+	
+	public List<Musician> getMembers() {
+		return members;
+	}
+	
+	// May not need this method
+	public void setMembers(List<Musician> members) {
+		this.members = members;
+	}
+	
+	public void addMember(Musician newMember){
+		members.add(newMember);
+	}
+	
+}

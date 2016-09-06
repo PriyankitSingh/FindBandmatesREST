@@ -1,0 +1,7 @@
+package nz.ac.auckland.musician.services;
+
+import javax.ws.rs.core.Application;
+
+public class MusicianApplication extends Application{
+
+}

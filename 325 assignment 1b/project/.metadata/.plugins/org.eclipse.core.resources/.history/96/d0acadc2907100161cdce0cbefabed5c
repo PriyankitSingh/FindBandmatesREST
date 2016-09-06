@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package nz.ac.auckland.musician;
+
+import nz.ac.auckland.parolee.domain.Gender;
+
+/**
+ * @author ankit
+ *
+ */
+public enum Instrument {
+	GUITAR, BASS, DRUMS, KEYBOARD, WOODWIND, VOCALS, BOWEDSTRINGS, OTHER;
+	
+	/**
+	 * Creates a Gender value from a text string.
+	 * 
+	 */
+	public static Instrument fromString(String text) {
+		if (text != null) {
+			for (Instrument g : Instrument.values()) {
+				if (text.equalsIgnoreCase(g.toString())) {
+					return g;
+				}
+			}
+		}
+		return null;
+	}
+}

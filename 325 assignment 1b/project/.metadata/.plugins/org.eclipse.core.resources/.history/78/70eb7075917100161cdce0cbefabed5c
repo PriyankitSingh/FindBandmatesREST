@@ -1,0 +1,63 @@
+package nz.ac.auckland.musician;
+
+import org.joda.time.DateTime;
+
+import nz.ac.auckland.parolee.domain.Gender;
+
+public class Musician {
+	private int _id;
+	private String _lastname;
+	private String _firstname;
+	private Gender _gender;
+	private DateTime _dateOfBirth;
+	private Instrument mainInstrument;
+	
+	public int get_id() {
+		return _id;
+	}
+	
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	
+	public String get_lastname() {
+		return _lastname;
+	}
+	
+	public void set_lastname(String _lastname) {
+		this._lastname = _lastname;
+	}
+	
+	public String get_firstname() {
+		return _firstname;
+	}
+	
+	public void set_firstname(String _firstname) {
+		this._firstname = _firstname;
+	}
+	
+	public Gender get_gender() {
+		return _gender;
+	}
+	
+	public void set_gender(Gender _gender) {
+		this._gender = _gender;
+	}
+	
+	public DateTime get_dateOfBirth() {
+		return _dateOfBirth;
+	}
+	
+	public void set_dateOfBirth(DateTime _dateOfBirth) {
+		this._dateOfBirth = _dateOfBirth;
+	}
+	
+	public Instrument getMainInstrument() {
+		return mainInstrument;
+	}
+	
+	public void setMainInstrument(Instrument mainInstrument) {
+		this.mainInstrument = mainInstrument;
+	}
+	
+}
