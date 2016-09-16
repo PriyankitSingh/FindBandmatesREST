@@ -1,8 +1,0 @@
-package nz.ac.auckland.musician.services;
-
-import javax.ws.rs.Path;
-
-@Path("/musicians")
-public class MusicianResource {
-
-}

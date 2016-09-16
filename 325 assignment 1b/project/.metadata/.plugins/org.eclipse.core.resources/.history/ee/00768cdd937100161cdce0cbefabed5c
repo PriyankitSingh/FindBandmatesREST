@@ -1,5 +1,0 @@
-package nz.ac.auckland.musician.domain;
-
-public enum Experience {
-	AMETUER, INERMEDIATE, PROFESSIONAL, BEGINNER;
-}

@@ -1,0 +1,8 @@
+package nz.ac.auckland.utilities;
+
+public class Snippet {
+	public static void main(String[] args) {
+		DatabaseUtility
+	}
+}
+
