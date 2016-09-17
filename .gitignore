@@ -221,3 +221,7 @@ pip-log.txt
 *.index
 *.lock
 *.log
+*.prefs
+*.prefs
+*.fdx
+*.xmi

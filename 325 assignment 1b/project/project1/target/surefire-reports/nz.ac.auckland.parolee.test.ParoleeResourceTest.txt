@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: nz.ac.auckland.parolee.test.ParoleeResourceTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.965 sec <<< FAILURE!
-testParoleeResource(nz.ac.auckland.parolee.test.ParoleeResourceTest)  Time elapsed: 0.767 sec  <<< FAILURE!
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.422 sec <<< FAILURE!
+testParoleeResource(nz.ac.auckland.parolee.test.ParoleeResourceTest)  Time elapsed: 1.113 sec  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.fail(Assert.java:95)

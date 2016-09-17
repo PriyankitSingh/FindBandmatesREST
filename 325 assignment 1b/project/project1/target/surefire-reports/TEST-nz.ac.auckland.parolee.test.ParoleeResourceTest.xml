@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="1" name="nz.ac.auckland.parolee.test.ParoleeResourceTest" time="0.81" errors="0" skipped="0">
+<testsuite tests="3" failures="1" name="nz.ac.auckland.parolee.test.ParoleeResourceTest" time="1.206" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\ankit\Desktop\325 assignment 1b\project\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf7463540090610284306.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\ankit\Desktop\Uni Notes\SOFTENG 325\Assignment 1 repository\FindBandmatesREST\325 assignment 1b\project\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8366612531786196821.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_101\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_101/bin/server;C:/Program Files/Java/jre1.8.0_101/bin;C:/Program Files/Java/jre1.8.0_101/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Broadcom\Broadcom 802.11;;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Hewlett-Packard\SimplePass\;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\nodejs\;;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\ankit\AppData\Local\Microsoft\WindowsApps;C:\Users\ankit\AppData\Roaming\npm;C:\Users\ankit\eclipse\java-neon\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testParoleeResource" time="0.767">
+  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testParoleeResource" time="1.113">
     <failure type="java.lang.AssertionError">java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.fail(Assert.java:95)
@@ -96,42 +96,42 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </failure>
-    <system-out>2016-09-05 18:22:29,230 [main] INFO  nz.ac.auckland.parolee.test.ParoleeResourceTest  - Creating Parolees ...
-2016-09-05 18:22:29,304 [main] DEBUG org.apache.http.impl.conn.BasicClientConnectionManager  - Get connection for route {}-&gt;http://localhost:10000
-2016-09-05 18:22:29,324 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnectionOperator  - Connecting to localhost:10000
-2016-09-05 18:22:29,352 [main] DEBUG org.apache.http.client.protocol.RequestAddCookies  - CookieSpec selected: best-match
-2016-09-05 18:22:29,368 [main] DEBUG org.apache.http.client.protocol.RequestAuthCache  - Auth cache not set in the context
-2016-09-05 18:22:29,368 [main] DEBUG org.apache.http.client.protocol.RequestTargetAuthentication  - Target auth state: UNCHALLENGED
-2016-09-05 18:22:29,369 [main] DEBUG org.apache.http.client.protocol.RequestProxyAuthentication  - Proxy auth state: UNCHALLENGED
-2016-09-05 18:22:29,369 [main] DEBUG org.apache.http.impl.client.DefaultHttpClient  - Attempt 1 to execute request
-2016-09-05 18:22:29,369 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Sending request: POST /services/parolees HTTP/1.1
-2016-09-05 18:22:29,370 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;POST /services/parolees HTTP/1.1[\r][\n]&quot;
-2016-09-05 18:22:29,371 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Accept-Encoding: gzip, deflate[\r][\n]&quot;
-2016-09-05 18:22:29,371 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Content-Type: application/xml[\r][\n]&quot;
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Content-Length: 137[\r][\n]&quot;
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Host: localhost:10000[\r][\n]&quot;
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Connection: Keep-Alive[\r][\n]&quot;
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;[\r][\n]&quot;
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.headers  - &gt;&gt; POST /services/parolees HTTP/1.1
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.headers  - &gt;&gt; Accept-Encoding: gzip, deflate
-2016-09-05 18:22:29,372 [main] DEBUG org.apache.http.headers  - &gt;&gt; Content-Type: application/xml
-2016-09-05 18:22:29,373 [main] DEBUG org.apache.http.headers  - &gt;&gt; Content-Length: 137
-2016-09-05 18:22:29,373 [main] DEBUG org.apache.http.headers  - &gt;&gt; Host: localhost:10000
-2016-09-05 18:22:29,373 [main] DEBUG org.apache.http.headers  - &gt;&gt; Connection: Keep-Alive
-2016-09-05 18:22:29,373 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;&lt;parolee&gt;&lt;first-name&gt;Al&lt;/first-name&gt;&lt;last-name&gt;Capone&lt;/last-name&gt;&lt;gender&gt;Male&lt;/gender&gt;&lt;date-of-birth&gt;17/01/1899&lt;/date-of-birth&gt;&lt;/parolee&gt;&quot;
-2016-09-05 18:22:29,418 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;HTTP/1.1 404 Not Found[\r][\n]&quot;
-2016-09-05 18:22:29,420 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;Content-Length: 0[\r][\n]&quot;
-2016-09-05 18:22:29,420 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;Server: Jetty(9.0.6.v20130930)[\r][\n]&quot;
-2016-09-05 18:22:29,420 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;[\r][\n]&quot;
-2016-09-05 18:22:29,421 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Receiving response: HTTP/1.1 404 Not Found
-2016-09-05 18:22:29,421 [main] DEBUG org.apache.http.headers  - &lt;&lt; HTTP/1.1 404 Not Found
-2016-09-05 18:22:29,421 [main] DEBUG org.apache.http.headers  - &lt;&lt; Content-Length: 0
-2016-09-05 18:22:29,421 [main] DEBUG org.apache.http.headers  - &lt;&lt; Server: Jetty(9.0.6.v20130930)
-2016-09-05 18:22:29,425 [main] DEBUG org.apache.http.impl.client.DefaultHttpClient  - Connection can be kept alive indefinitely
-2016-09-05 18:22:29,432 [main] ERROR nz.ac.auckland.parolee.test.ParoleeResourceTest  - Failed to create Parolee; Web service responded with: 404
-2016-09-05 18:22:29,433 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Connection 0.0.0.0:56363&lt;-&gt;127.0.0.1:10000 closed
+    <system-out>2016-09-06 14:31:10,105 [main] INFO  nz.ac.auckland.parolee.test.ParoleeResourceTest  - Creating Parolees ...
+2016-09-06 14:31:10,176 [main] DEBUG org.apache.http.impl.conn.BasicClientConnectionManager  - Get connection for route {}-&gt;http://localhost:10000
+2016-09-06 14:31:10,195 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnectionOperator  - Connecting to localhost:10000
+2016-09-06 14:31:10,225 [main] DEBUG org.apache.http.client.protocol.RequestAddCookies  - CookieSpec selected: best-match
+2016-09-06 14:31:10,237 [main] DEBUG org.apache.http.client.protocol.RequestAuthCache  - Auth cache not set in the context
+2016-09-06 14:31:10,237 [main] DEBUG org.apache.http.client.protocol.RequestTargetAuthentication  - Target auth state: UNCHALLENGED
+2016-09-06 14:31:10,238 [main] DEBUG org.apache.http.client.protocol.RequestProxyAuthentication  - Proxy auth state: UNCHALLENGED
+2016-09-06 14:31:10,238 [main] DEBUG org.apache.http.impl.client.DefaultHttpClient  - Attempt 1 to execute request
+2016-09-06 14:31:10,239 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Sending request: POST /services/parolees HTTP/1.1
+2016-09-06 14:31:10,239 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;POST /services/parolees HTTP/1.1[\r][\n]&quot;
+2016-09-06 14:31:10,240 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Accept-Encoding: gzip, deflate[\r][\n]&quot;
+2016-09-06 14:31:10,240 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Content-Type: application/xml[\r][\n]&quot;
+2016-09-06 14:31:10,240 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Content-Length: 137[\r][\n]&quot;
+2016-09-06 14:31:10,240 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Host: localhost:10000[\r][\n]&quot;
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;Connection: Keep-Alive[\r][\n]&quot;
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;[\r][\n]&quot;
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; POST /services/parolees HTTP/1.1
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; Accept-Encoding: gzip, deflate
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; Content-Type: application/xml
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; Content-Length: 137
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; Host: localhost:10000
+2016-09-06 14:31:10,241 [main] DEBUG org.apache.http.headers  - &gt;&gt; Connection: Keep-Alive
+2016-09-06 14:31:10,242 [main] DEBUG org.apache.http.wire  -  &gt;&gt; &quot;&lt;parolee&gt;&lt;first-name&gt;Al&lt;/first-name&gt;&lt;last-name&gt;Capone&lt;/last-name&gt;&lt;gender&gt;Male&lt;/gender&gt;&lt;date-of-birth&gt;17/01/1899&lt;/date-of-birth&gt;&lt;/parolee&gt;&quot;
+2016-09-06 14:31:10,481 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;HTTP/1.1 404 Not Found[\r][\n]&quot;
+2016-09-06 14:31:10,484 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;Content-Length: 0[\r][\n]&quot;
+2016-09-06 14:31:10,485 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;Server: Jetty(9.0.6.v20130930)[\r][\n]&quot;
+2016-09-06 14:31:10,485 [main] DEBUG org.apache.http.wire  -  &lt;&lt; &quot;[\r][\n]&quot;
+2016-09-06 14:31:10,486 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Receiving response: HTTP/1.1 404 Not Found
+2016-09-06 14:31:10,486 [main] DEBUG org.apache.http.headers  - &lt;&lt; HTTP/1.1 404 Not Found
+2016-09-06 14:31:10,486 [main] DEBUG org.apache.http.headers  - &lt;&lt; Content-Length: 0
+2016-09-06 14:31:10,486 [main] DEBUG org.apache.http.headers  - &lt;&lt; Server: Jetty(9.0.6.v20130930)
+2016-09-06 14:31:10,491 [main] DEBUG org.apache.http.impl.client.DefaultHttpClient  - Connection can be kept alive indefinitely
+2016-09-06 14:31:10,502 [main] ERROR nz.ac.auckland.parolee.test.ParoleeResourceTest  - Failed to create Parolee; Web service responded with: 404
+2016-09-06 14:31:10,503 [main] DEBUG org.apache.http.impl.conn.DefaultClientConnection  - Connection 0.0.0.0:61965&lt;-&gt;127.0.0.1:10000 closed
 </system-out>
   </testcase>
-  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testAuditorNoCookiesTest" time="0.02"/>
-  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testAuditorWithCookiesTest" time="0.023"/>
+  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testAuditorNoCookiesTest" time="0.016"/>
+  <testcase classname="nz.ac.auckland.parolee.test.ParoleeResourceTest" name="testAuditorWithCookiesTest" time="0.077"/>
 </testsuite>

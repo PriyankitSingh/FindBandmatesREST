@@ -1,33 +1,67 @@
 package nz.ac.auckland.musician.domain;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import org.joda.time.DateTime;
-
-import nz.ac.auckland.parolee.domain.Gender;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Musician {
 	
-	@Id @GeneratedValue private int id;
+	@Id  private int id;
 	private String lastname;
 	private String firstname;
 	private Gender gender;
 	private Experience skillLevel;
-	private DateTime dateOfBirth;
+	private Calendar dateOfBirth;
 	private Instrument mainInstrument;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="bandName")
-	private Band band;
+	@ManyToMany(cascade = CascadeType.PERSIST)     
+	@JoinTable(name = "MUSICIAN_BAND", 
+		joinColumns = @JoinColumn(name = "MUSICIAN_ID"),
+		inverseJoinColumns = @JoinColumn(name = "BAND_ID")     
+	)
+	private List<Band> bands = new ArrayList<Band>();
 	
+	
+
+
 	public Musician() {
 		super();
+	}
+	
+	public List<Band> getBands() {
+		return bands;
+	}
+
+
+	public void setBands(List<Band> bands) {
+		this.bands = bands;
+	}
+	
+	public void addBand(Band band){
+		bands.add(band);
+	}
+	
+	public void leaveBand(Band band){
+		for (int i = 0 ; i < bands.size() ; i++){
+			Band currBand = bands.get(i);
+			if (currBand.getBandName() == band.getBandName()){
+				bands.remove(i);
+				return;
+			}
+		}
 	}
 
 
@@ -38,7 +72,7 @@ public class Musician {
 
 
 	public Musician(int id, String lastname, String firstname, Gender gender, Experience skillLevel,
-			DateTime dateOfBirth, Instrument mainInstrument) {
+			Calendar dateOfBirth, Instrument mainInstrument) {
 		super();
 		this.id = id;
 		this.lastname = lastname;
@@ -100,12 +134,12 @@ public class Musician {
 	}
 
 
-	public DateTime getDateOfBirth() {
+	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
 	
-	public void setDateOfBirth(DateTime dateOfBirth) {
+	public void setDateOfBirth(Calendar dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -120,12 +154,4 @@ public class Musician {
 	}
 
 
-	public Band getBand() {
-		return band;
-	}
-
-
-	public void setBand(Band band) {
-		this.band = band;
-	}
 }

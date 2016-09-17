@@ -3,8 +3,6 @@
  */
 package nz.ac.auckland.musician.domain;
 
-import nz.ac.auckland.parolee.domain.Gender;
-
 /**
  * @author Priyankit
  *

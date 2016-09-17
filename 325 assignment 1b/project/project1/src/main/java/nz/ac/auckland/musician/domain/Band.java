@@ -6,23 +6,27 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Band {
 	@Id @GeneratedValue 
 	private int id;
 	
 	private String bandName;
 	
-	@OneToMany(mappedBy="band")
+	@ManyToMany(mappedBy = "bands")
 	private List<Musician> members = new ArrayList<Musician>();
 	
 	
 	public Band() {
 		super();
 	}
-
 
 	public Band(String bandName) {
 		super();
