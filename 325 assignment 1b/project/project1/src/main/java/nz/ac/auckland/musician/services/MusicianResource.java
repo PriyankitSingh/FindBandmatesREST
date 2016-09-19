@@ -17,9 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -131,14 +129,14 @@ public class MusicianResource {
 	
 	/**
 	 * Gets all musicians who play a certain instrument.
-	 * GET <base-uri>/musicians ? instrument = GUITAR TODO: use JAXB
+	 * GET <base-uri>/musicians ? instrument = {instrument}
 	 * @param instrument as a query parameter
 	 * @return
 	 */
 	@GET
 	@Produces("application/xml")
 	public List<Musician> retrieveMusiciansByInstrument(@QueryParam("Instrument") String instrument) {
-		Instrument instr = Instrument.valueOf(instrument.toUpperCase());
+		Instrument instr = Instrument.fromString(instrument.toUpperCase());
 		
 		PersistanceManager manager = PersistanceManager.instance();
 		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
@@ -153,7 +151,7 @@ public class MusicianResource {
 	
 	/**
 	 * Gets all musicians who play a certain instrument and have a certain skill level
-	 * GET <base-uri>/musician ? instrument = {instrument}, experience = {xp} TODO: use JAXB
+	 * GET <base-uri>/musician ? instrument = {instrument}, experience = {xp}
 	 * @param: instrument: required instrument, xp: required skill level
 	 * @return
 	 */
@@ -161,8 +159,8 @@ public class MusicianResource {
 	@Produces("application/xml")
 	public List<Musician> retrieveMusicianByInstrumentAndExperience(@QueryParam("Instrument") String instrument, 
 			@QueryParam("Experience") String xp){
-		Instrument instr = Instrument.valueOf(instrument.toUpperCase());
-		Experience exp = Experience.valueOf(xp);
+		Instrument instr = Instrument.fromString(instrument.toUpperCase());
+		Experience exp = Experience.fromString(xp.toUpperCase());
 		
 		PersistanceManager manager = PersistanceManager.instance();
 		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
@@ -178,6 +176,7 @@ public class MusicianResource {
 	/**
 	 * Creates a new musician and adds it to the database
 	 * POST <base-uri>/musician/{musician}
+	 * TODO: remove random print statements
 	 * @param musician: musician to be added to database
 	 * @return
 	 */
@@ -239,57 +238,5 @@ public class MusicianResource {
 		
 		return Response.created(URI.create("/musician/band/" + band.getId()))
 				.build();
-	}
-	
-	
-	/**
-	 * Writes a musician to the output stream
-	 * TODO: use JAXB for marshalling and unmarshalling
-	 * @param os
-	 * @param musician
-	 * @throws IOException
-	 */
-	protected void outputMusician(OutputStream os, Musician musician) throws IOException{
-		String dateOfBirth = musician.getDateOfBirth().toString();
-		
-		PrintStream writer = new PrintStream(os);
-		writer.println("<parolee id=\"" + musician.getId() + "\">");
-		writer.println("   <first-name>" + musician.getFirstname()
-				+ "</first-name>");
-		writer.println("   <last-name>" + musician.getLastname()
-				+ "</last-name>");
-		writer.println("   <gender>" + musician.getGender() + "</gender>");
-		writer.println("   <instrument>" + musician.getMainInstrument() +"</instrument>");
-		writer.println("   <experience>" + musician.getSkillLevel()+ "</experience>");
-		writer.println("   <date-of-birth>" + dateOfBirth + "</date-of-birth>");
-		writer.println("   <band>" + musician.getBands() + "</band>"); 
-		writer.println("</parolee>");
-	}
-	
-	/**
-	 * 
-	 * @param os
-	 * @param musician
-	 * @throws JAXBException 
-	 */
-	protected void outputMarshalledObject(OutputStream os, Musician musician) throws JAXBException{
-		JAXBContext context = JAXBContext.newInstance(Musician.class);
-		Marshaller marshaller = context.createMarshaller();
-		
-		marshaller.marshal(musician, os);
-		marshaller.marshal(musician, System.out);
-		return;
-	}
-	
-	/**
-	 * Writes multiple musicians to the output stream
-	 * @param os
-	 * @param musicians
-	 * @throws IOException
-	 */
-	protected void outputMusicianList(OutputStream os, List<Musician> musicians) throws IOException {
-		for(Musician person : musicians){
-			outputMusician(os, person);
-		}
 	}
 }

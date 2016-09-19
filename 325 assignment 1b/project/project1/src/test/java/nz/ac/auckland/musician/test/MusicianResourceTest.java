@@ -106,8 +106,6 @@ public class MusicianResourceTest {
 	 */
 	@Test
 	public void testBandResource(){
-		logger.debug("Starting testCreateMusician");
-		
 		logger.info("Making GET request");
 		
 		Band band = client.target(WEB_SERVICE_URI + "/band").path("1").request()
@@ -115,6 +113,28 @@ public class MusicianResourceTest {
 		
 		logger.info("Band name : " + band.getBandName());
 		assertEquals(blackSabbath.getBandName(), band.getBandName());
+	}
+	
+	/**
+	 * Testing musician resource with query parameters.
+	 */
+	@Test
+	public void testMusicianQueryParam(){
+		logger.info("Making GET request");
+		
+		// Make a GET request to the server using query parameters to get Toni Iommi
+		Musician musicianInResponse = client.target(WEB_SERVICE_URI).queryParam("id", "1")
+				.request().accept("application/xml").get(Musician.class);
+		
+		if(musicianInResponse == null){
+			fail("GET request did not return any object");
+		}
+		// Check if correct musician is recieved
+		assertEquals(ti.getFirstname(), musicianInResponse.getFirstname());
+		assertEquals(ti.getMainInstrument(), musicianInResponse.getMainInstrument());
+		assertEquals(ti.getSkillLevel(), musicianInResponse.getSkillLevel());
+		assertEquals(ti.getLastname(), musicianInResponse.getLastname());
+		assertEquals(ti.getGender(), musicianInResponse.getGender());
 	}
 
 }
