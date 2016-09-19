@@ -9,9 +9,13 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/services")
 public class MusicianApplication extends Application{
 	   private Set<Object> singletons = new HashSet<Object>();
+	   private Set<Class<?>> classes = new HashSet<Class<?>>();
 
 	   public MusicianApplication(){
-		   singletons.add(new MusicianResource());
+//		   singletons.add(new MusicianResource());
+		   classes.add(MusicianResource.class);
+		   // Register the ContextResolver class for JAXB.
+		   classes.add(MusicianResolver.class);
 	   }
 	   
 	   /**
@@ -20,5 +24,11 @@ public class MusicianApplication extends Application{
 	   @Override
 	   public Set<Object> getSingletons(){
 		   return singletons;
+	   }
+	   
+	   @Override
+	   public Set<Class<?>> getClasses()
+	   {
+	      return classes;
 	   }
 }

@@ -14,6 +14,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -27,7 +30,8 @@ public class Musician {
 	private Calendar dateOfBirth;
 	private Instrument mainInstrument;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)     
+	@ManyToMany(cascade = CascadeType.PERSIST) 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "MUSICIAN_BAND", 
 		joinColumns = @JoinColumn(name = "MUSICIAN_ID"),
 		inverseJoinColumns = @JoinColumn(name = "BAND_ID")     

@@ -50,14 +50,14 @@ public class PersistanceManager {
 	}
 	
 	/**
-	 * 
+	 * Adds musician to the database
 	 * @param musician
 	 */
 	public void addMusicianToDatabase(Musician musician){
 		logger.info("Creating entity manager");
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		logger.info("begun transaction");
+		logger.info("began a transaction");
 		
 		try{
 			manager.persist(musician);
@@ -66,12 +66,19 @@ public class PersistanceManager {
 		}
 		logger.info("Sent to persist");
 		manager.getTransaction().commit();
-		manager.clear();
+		manager.close();
 	}
 	
+	/**
+	 * Gets all musicians from the database.
+	 * @return
+	 */
 	public List<Musician> getMusiciansFromDatabase(){
+		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		List<Musician> musicians = manager.createQuery("select m from Musician m", Musician.class).getResultList();
+		
+		manager.close();
 		return musicians;
 	}
 	
@@ -105,5 +112,9 @@ public class PersistanceManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void close(){
+		factory.close();
 	}
 }

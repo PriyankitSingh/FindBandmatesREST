@@ -43,6 +43,12 @@
 			<artifactId>resteasy-servlet-initializer</artifactId>
 			<version>3.0.12.Final</version>
 		</dependency>
+		<!-- RESTEasy JAXB provider -->
+        <dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.0.12.Final</version>
+		</dependency>
 		<!-- H2 embedded database. -->
 		<dependency>
 			<groupId>com.h2database</groupId>
