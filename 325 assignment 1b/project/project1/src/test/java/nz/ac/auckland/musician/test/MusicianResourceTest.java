@@ -2,7 +2,9 @@ package nz.ac.auckland.musician.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -15,6 +17,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import nz.ac.auckland.musician.domain.Band;
 import nz.ac.auckland.musician.domain.Experience;
 import nz.ac.auckland.musician.domain.Gender;
 import nz.ac.auckland.musician.domain.Instrument;
@@ -28,6 +31,7 @@ public class MusicianResourceTest {
 	private static Client client;
 	private static Musician ozzy;
 	private static Musician ti;
+	private static Band blackSabbath;
 	
 	@BeforeClass
 	public static void setUpDatabase(){
@@ -50,6 +54,18 @@ public class MusicianResourceTest {
 				.target(WEB_SERVICE_URI).request()
 				.post(Entity.xml(ozzy));
 		response2.close();
+		
+		// Add members to a band
+		List<Musician> members = new ArrayList();
+		members.add(ozzy);
+		members.add(ti);
+		blackSabbath = new Band("Black Sabbath");
+		
+		// Make a POST request to add them to the band
+		Response response3 = client
+				.target(WEB_SERVICE_URI+"/bands").request()
+				.post(Entity.xml(blackSabbath));
+		response3.close();
 	}
 	
 	@AfterClass
@@ -58,20 +74,13 @@ public class MusicianResourceTest {
 	}
 	
 	/**
-	 * Testing POST and GET responses. Marshalling should be done automatically.
+	 * Testing musician resource using path parameters.
 	 */
 	@Test
 	public void testCreateMusician(){
 		logger.debug("Starting testCreateMusician");
 		
-//		if (response.getStatus() != 201) {
-//			fail("Failed to create new Musician");
-//		}
-		
-//		String location = response.getLocation().toString();
-//		response.close();
-		
-		logger.info("Making GET request"); // Doesn't seem to work
+		logger.info("Making GET request");
 		
 		// Make a GET request to the server using query parameters to get Toni Iommi
 //		Musician musicianInResponse = client.target(WEB_SERVICE_URI).queryParam("id", "1")
@@ -92,9 +101,20 @@ public class MusicianResourceTest {
 		assertEquals(ti.getGender(), musicianInResponse.getGender());
 	}
 	
+	/**
+	 * Testing band resource using path parameters
+	 */
 	@Test
 	public void testBandResource(){
+		logger.debug("Starting testCreateMusician");
 		
+		logger.info("Making GET request");
+		
+		Band band = client.target(WEB_SERVICE_URI + "/band").path("1").request()
+				.accept("application/xml").get(Band.class);
+		
+		logger.info("Band name : " + band.getBandName());
+		assertEquals(blackSabbath.getBandName(), band.getBandName());
 	}
 
 }

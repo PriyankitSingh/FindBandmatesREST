@@ -14,6 +14,7 @@ public class MusicianApplication extends Application{
 	   public MusicianApplication(){
 //		   singletons.add(new MusicianResource());
 		   classes.add(MusicianResource.class);
+		   classes.add(BandResource.class);
 		   // Register the ContextResolver class for JAXB.
 		   classes.add(MusicianResolver.class);
 	   }

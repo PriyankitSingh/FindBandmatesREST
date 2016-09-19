@@ -4,18 +4,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.URI;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,12 +27,11 @@ import javax.xml.bind.Marshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import nz.ac.auckland.musician.domain.Band;
 import nz.ac.auckland.musician.domain.Experience;
 import nz.ac.auckland.musician.domain.Instrument;
 import nz.ac.auckland.musician.domain.Musician;
-import nz.ac.auckland.utilities.DatabaseUtility;
 import nz.ac.auckland.utilities.PersistanceManager;
-import nz.ac.auckland.utilities.PersistenceManager2;
 
 @Path("/musicians")
 public class MusicianResource {
@@ -68,15 +61,20 @@ public class MusicianResource {
 	@GET
 	@Produces("application/xml")
 	public Musician getMusicianQueryParam(@QueryParam("id") int id){
-		logger.info("Retrieving parolee with id: " + id);
-		final Musician musician = musicianDB.get(id);
+		logger.info("Retrieving Musician with id: " + id);
 		
-		if (musician == null) {
-			logger.info("Musician not found");
-			// Return a HTTP 404 response if the specified Musician isn't found.
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		PersistanceManager manager = PersistanceManager.instance();
+		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
+		
+		logger.info("Number of musicians found: " + Integer.toString(allMusicians.size()) );
+		
+		for (Musician muso : allMusicians){
+			logger.info(muso.getFirstname()+" "+ muso.getLastname()+" " +muso.getId());
+			if (muso.getId() == id){
+				return muso;
+			}
 		}
-		return musician;
+		return null;
 	}
 	
 	/**
@@ -91,29 +89,41 @@ public class MusicianResource {
 	public Musician getMusicianPathParam(@PathParam("id") int id){
 		logger.info("Retrieving Musician with id: " + id);
 		
-//		EntityManagerFactory entityManagerFactory= Persistence.createEntityManagerFactory("nz.ac.auckland.musicianPU");
-//		EntityManager manager = entityManagerFactory.createEntityManager();
-//		manager.getTransaction().begin();
-//		
-//		logger.info("Making Query to the database");
-//		// Get all musicians from the database.
-//		List<Musician> allMusicians = manager.createQuery("select m from Musician m", Musician.class).getResultList();
-//		logger.info("Number of musicians: " + Integer.toString(allMusicians.size()) + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-//		for (Musician m : allMusicians ) {
-//			logger.info("Musician: " + m.getFirstname() + " " + m.getLastname());
-//		}
-		// not working 
 		PersistanceManager manager = PersistanceManager.instance();
 		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
-		manager.close();
 		
-//		entityManagerFactory.close();
 		logger.info("Number of musicians found: " + Integer.toString(allMusicians.size()) );
 		
 		for (Musician muso : allMusicians){
 			logger.info(muso.getFirstname()+" "+ muso.getLastname()+" " +muso.getId());
 			if (muso.getId() == id){
 				return muso;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * GET <base-uri>/musicians/band/{id}
+	 * Returns a band with appropriate id.
+	 * @param id
+	 * @return band with the required id
+	 */
+	@GET
+	@Path("/band/{id}")
+	@Produces("application/xml")
+	public Band getBandPathParam(@PathParam("id") int id){
+		logger.info("Retrieving band with id: " + id);
+		
+		PersistanceManager manager = PersistanceManager.instance();
+		List<Band> bands = manager.getBandsFromDatabase();
+		
+		logger.info("Number of bands found : " + Integer.toString(bands.size()));
+		
+		for (Band band : bands){
+			logger.info(band.getBandName());
+			if(band.getId() == id){
+				return band;
 			}
 		}
 		return null;
@@ -127,45 +137,18 @@ public class MusicianResource {
 	 */
 	@GET
 	@Produces("application/xml")
-	public StreamingOutput retrieveMusiciansByInstrument(@QueryParam("Instrument") Instrument instrument) {
-		final List<Musician> musicians = new ArrayList<Musician>();
-
-		for (int i=0; i < musicians.size(); i++){
-			Musician currMusician = musicianDB.get(i);
-			if(currMusician.getMainInstrument() == instrument){
-				musicians.add(currMusician);
-			}	
-		}
-		return new StreamingOutput() {
-			public void write(OutputStream outputStream) throws IOException,
-					WebApplicationException {
-				outputMusicianList(outputStream, musicians);
-			}
-		};
-	}
-	
-	/**
-	 * Gets the first musician.
-	 * FOR TESTING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	 * @return
-	 */
-	@GET
-	@Produces("application/xml")
-	public List<Musician> getFirstMusician(){
-		logger.info("Inside test GET method");
+	public List<Musician> retrieveMusiciansByInstrument(@QueryParam("Instrument") String instrument) {
+		Instrument instr = Instrument.valueOf(instrument.toUpperCase());
 		
-		logger.info("Getting all musicians from the database");
-		
-		PersistanceManager manager = new PersistanceManager();
+		PersistanceManager manager = PersistanceManager.instance();
 		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
-		manager.close();
-		
-		logger.info("Retrieved data from database of size: " + Integer.toString(allMusicians.size()));
-		return allMusicians;
-//		if(allMusicians.size() == 0){
-//			logger.info("No musicians present in the database");
-//			return null;
-//		}
+		List<Musician> reqdMusicians = new ArrayList<Musician>();
+		for(Musician muso : allMusicians){
+			if(muso.getMainInstrument() == instr){
+				reqdMusicians.add(muso);
+			}
+		}
+		return reqdMusicians;
 	}
 	
 	/**
@@ -176,22 +159,20 @@ public class MusicianResource {
 	 */
 	@GET
 	@Produces("application/xml")
-	public StreamingOutput retrieveMusicianByInstrumentAndExperience(@QueryParam("Instrument") Instrument instrument, 
-			@QueryParam("Experience") Experience xp){
-		final List<Musician> musicians = new ArrayList<Musician>();
-
-		for (int i=0; i < musicians.size(); i++){
-			Musician currMusician = musicianDB.get(i);
-			if(currMusician.getMainInstrument() == instrument && currMusician.getSkillLevel() == xp){
-				musicians.add(currMusician);
-			}	
-		}
-		return new StreamingOutput() {
-			public void write(OutputStream outputStream) throws IOException,
-					WebApplicationException {
-				outputMusicianList(outputStream, musicians);
+	public List<Musician> retrieveMusicianByInstrumentAndExperience(@QueryParam("Instrument") String instrument, 
+			@QueryParam("Experience") String xp){
+		Instrument instr = Instrument.valueOf(instrument.toUpperCase());
+		Experience exp = Experience.valueOf(xp);
+		
+		PersistanceManager manager = PersistanceManager.instance();
+		List<Musician> allMusicians = manager.getMusiciansFromDatabase();
+		List<Musician> reqdMusicians = new ArrayList<Musician>();
+		for(Musician muso : allMusicians){
+			if(muso.getMainInstrument() == instr && muso.getSkillLevel() == exp){
+				reqdMusicians.add(muso);
 			}
-		};
+		}
+		return reqdMusicians;
 	}
 	
 	/**
@@ -231,6 +212,32 @@ public class MusicianResource {
 				+ " id: " + musician.getId());
 		
 		return Response.created(URI.create("/musician/" + musician.getId()))
+				.build();
+	}
+	
+	/**
+	 * Adds a band to the database.
+	 * @param band
+	 * @return
+	 */
+	@POST
+	@Path("/bands")
+	@Consumes("application/xml")
+	public Response createBand(Band band){
+		logger.info("Adding band: " + band.getBandName());
+		// Add musician to database and persist the musician
+		// persist using JPA
+		
+		// Print contents of database before adding musician
+		PersistanceManager manager = PersistanceManager.instance();
+		
+		// Option 1: Using PersistenceManager
+		manager.addBandToDatabase(band);
+		
+		// printing for debugging
+		logger.info("Added band: " + band.getBandName() + " to the database");
+		
+		return Response.created(URI.create("/musician/band/" + band.getId()))
 				.build();
 	}
 	

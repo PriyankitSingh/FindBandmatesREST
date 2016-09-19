@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -25,12 +27,18 @@ public class Musician {
 	@Id  private int id;
 	private String lastname;
 	private String firstname;
-	private Gender gender;
-	private Experience skillLevel;
 	private Calendar dateOfBirth;
+	
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
+	
+	@Enumerated(EnumType.STRING)
+	private Experience skillLevel;
+	
+	@Enumerated(EnumType.STRING)
 	private Instrument mainInstrument;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST) 
+	@ManyToMany(cascade = CascadeType.ALL) 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "MUSICIAN_BAND", 
 		joinColumns = @JoinColumn(name = "MUSICIAN_ID"),

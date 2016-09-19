@@ -83,35 +83,35 @@ public class PersistanceManager {
 	}
 	
 	/**
-	 * 
+	 * Adds a band to H2 database
 	 * @param band
 	 */
 	public void addBandToDatabase(Band band){
-		EntityManager manager = factory.createEntityManager();
-		try {
-			transaction.begin();
+		logger.info("Creating entity manager");
+		manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		logger.info("began a transaction");
+		try{
 			manager.persist(band);
-			transaction.commit();
-		} catch (NotSupportedException e) {
-			e.printStackTrace();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicMixedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RollbackException e) {
-			// TODO Auto-generated catch block
+		}catch(Exception e){
 			e.printStackTrace();
 		}
+		logger.info("Sent to persist");
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	/**
+	 * Gets all bands from the database
+	 * @return
+	 */
+	public List<Band> getBandsFromDatabase(){
+		manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		List<Band> bands = manager.createQuery("select b from Band b", Band.class).getResultList();
+		
+		manager.close();
+		return bands;
 	}
 	
 	public void close(){
