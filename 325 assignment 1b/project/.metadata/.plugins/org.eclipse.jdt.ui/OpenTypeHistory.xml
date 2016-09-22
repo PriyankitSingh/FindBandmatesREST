@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=project1/C:\/Users\/ankit\/.m2\/repository\/org\/jboss\/resteasy\/jaxrs-api\/3.0.12.Final\/jaxrs-api-3.0.12.Final.jar&lt;javax.ws.rs.ext(ContextResolver.class[ContextResolver" modifiers="1537" timestamp="1472009010488"/>
+<typeInfo handle="=project1/C:\/Program Files\/Java\/jdk1.8.0_101\/jre\/lib\/rt.jar&lt;javax.naming(Context.class[Context" modifiers="1537" timestamp="1469256252125"/>
+</typeInfoHistroy>
